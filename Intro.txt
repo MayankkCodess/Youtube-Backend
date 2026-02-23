@@ -1,0 +1,23 @@
+-----------------Video 1--------------------
+
+# First things there is a UI Developer work to make a FIGMA File 
+# So , a Backend Developer work is to pick Data Points from it & work 
+
+ 
+ #Important Points :- 
+ 1. We have to see frontend file and thought how should we collect data from it 
+    because the important things for us is data 
+ 2. So now think 1. data ko kaise liya jaye 2. kaise store kiya zaye 3. aur kaise usko process karke samne diya zaye 
+    
+    This all are the work of Backend Developer
+
+
+
+# We are going to store images:- & imp thing to know 
+
+we make user to upload photo and then stay that temporarily on our server
+so incase if connection loss happen of user then still we have that image in server
+and then after a third process we upload it to cloudinary 
+
+#.gitignore generator on chrome 
+#.gitkeep for those folders which you want to track but git does not allows
