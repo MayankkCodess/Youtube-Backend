@@ -1,0 +1,9 @@
+# what you dont have to touch
+
+/.vscode
+/node_modules 
+./dist
+
+*.env
+.env
+.env.*

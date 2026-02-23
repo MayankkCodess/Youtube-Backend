@@ -21,3 +21,12 @@ and then after a third process we upload it to cloudinary
 
 #.gitignore generator on chrome 
 #.gitkeep for those folders which you want to track but git does not allows
+
+
+# some more learnings - 1. source control usage 
+                        2. touch actual usage 
+                        3. mkdir folder structure usage 
+
+# some more - 1. nodemon as dev dependency 
+              2. prettier as dev dependency (eg - 4 coder some has added ; in js but some not )
+
