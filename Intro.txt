@@ -1,4 +1,5 @@
 -----------------Video 1--------------------
+[Learning - Just by seeing frontend UI think of Backend]
 
 # First things there is a UI Developer work to make a FIGMA File 
 # So , a Backend Developer work is to pick Data Points from it & work 
@@ -30,3 +31,28 @@ and then after a third process we upload it to cloudinary
 # some more - 1. nodemon as dev dependency 
               2. prettier as dev dependency (eg - 4 coder some has added ; in js but some not )
 
+
+--------------------Video 2--------------------------
+[Data Base Connection] - TOPICS - ATLAS , DATABASE CONNECTION , DOTENV , DEBBUGING
+  -----------CLUSTERES ,DATABASE ACCESS,NETWORK ACCESS ,DATABASE 
+
+1. Atlas - mongodb subservice where they give online db on cloud
+2. Here mongodb goes behind the scene to aws and create connection strings and full web settings 
+6F2G1L5RSleDA3ml
+3. now as mongodb has created connection but i also need to create database user 
+
+Important :- 1. for entering in mongodb through atlas 
+                  a. first we need correct ip address 
+                  b. second we need correct credentials (id ,password)
+                  c. and URL(string) also  - 
+
+---so now get string and add in .env 
+
+Important Points - 
+  1. when u try to talk to db there are chances of coming errors - so always wrap in try/catch 
+  2. database is always in another continent so it takes time - so always add async/await 
+
+** if any change in .env happen then you have to reload any way nothing in hand of nodemon
+
+
+---------------------------Video 3------------------------------
