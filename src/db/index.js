@@ -3,6 +3,8 @@ import { DB_NAME } from "../constants.js";
 
 //()()- this is an IIFE in js used as - ;()()
 //node.js gives us access to proccess -(this current application is running on process , and below is that refrence)
+
+ // below async method when completed it always return promise
  const connectDB = async ()=>{
     try {
         //mongoose actually gives you a return object below , so we get response in connectionInstance below

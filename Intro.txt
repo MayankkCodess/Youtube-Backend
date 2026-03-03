@@ -56,3 +56,37 @@ Important Points -
 
 
 ---------------------------Video 3------------------------------
+
+Express , cookie-parser , cors , custom apierror , apiresponse
+
+1. mostly you were in 5x in , request and response in express documentation 
+
+.....a. req means - kab kab data kaise aa raha hai mere pass , usko handle krna hai
+     b. res - kaise response mujhe bhejna hai 
+            
+          ######  aap kaise in sab se data loge 
+     -- mainly req.params - URL related 
+               req.body - data may be in form related , json related , so you have to write configurations for that 
+               req.cookies - cookies se data lena , kaise server se cookies securely store ki jati hai user ke browser mai ,kaise isko read kiya jata hai 
+
+we do app.use mainly for middlewares and configuration settings 
+     cors - cross origin resource sharing 
+
+***********Middleware*************
+if you have used (err,req,res,next) , here next(it is a flag) means you are talking about middlewares
+
+imp .. 1 here - flag on when middlwares started and flag off when res send to client 
+
+
+
+
+Important :- sometimes - we can want to standardized both Response and Error of API; 
+
+Node.js API Class of Error
+
+
+
+------------------------------Video 4--------------------
+ Topics - Models 
+
+ 
