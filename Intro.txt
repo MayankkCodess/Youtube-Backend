@@ -87,6 +87,25 @@ Node.js API Class of Error
 
 
 ------------------------------Video 4--------------------
- Topics - Models 
+ Topics - Models ,bcrypt , jwt , accesstoken , refreshtoken 
 
+ // Think of this - mongoose aggregate paginate v2 
+// also middlewares - like pre (means do somethings before saving data in db) , post - (means do after saving data in db)
+// learn about plugins - (A plugin in Mongoose is a reusable piece of functionality that you can attach to a schema)
  
+ bcrypt and bcryptjs are different 
+
+ both have same functionalities one is node js and anothere is simple javascript
+
+ used to hash , salt etc in password 
+
+ .... jsonwebtoken ........  jwt.io
+
+they use cryptographic algorithmn 
+
+jwt has three parts - headers(1. algorithm , 2. token type),   2. payload:data , 3. verify signature (secret 64)
+
+jo bhi data aap bhejan chahte ho wo usme apne app encrypt ho jata hai - payload mai
+
+now JWT - jwt is a bearer token means - one who send me this token i will send him the data
+1. accesstoken and refresh token both are jwt token but usage are different
