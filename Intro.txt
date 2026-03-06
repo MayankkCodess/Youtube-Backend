@@ -109,3 +109,17 @@ jo bhi data aap bhejan chahte ho wo usme apne app encrypt ho jata hai - payload 
 
 now JWT - jwt is a bearer token means - one who send me this token i will send him the data
 1. accesstoken and refresh token both are jwt token but usage are different
+
+---------------------------Video 5---------------------
+//file uploading - multer 
+
+1. maily file upload work is upto backend developer 
+
+because frontend only does - form creation , then browse and then link of file 
+
+
+we need cloudinary for file uploading 
+
+*********Important**************
+what we do is - 1.  we make user to upload file through multer and make/ place it on  our server locally . 
+                2. in second step what we do is using cloudinary take file from that local server

@@ -7,9 +7,9 @@ import { DB_NAME } from "../constants.js";
  // below async method when completed it always return promise
  const connectDB = async ()=>{
     try {
-        //mongoose actually gives you a return object below , so we get response in connectionInstance below
+        //mongoose actually gives you a return object below , so we get response in connectionInstance below 
        const connectionInstance =  await mongoose.connect(`${process.env.MONGO_URI}/${DB_NAME}`);
-       //for getting mongodb url where connection is happening , because database is always different for production , development ,testing
+       //for getting mongodb url where connection is happening we write below , because database is always different for production , development ,testing
        console.log(`\n MongoDB Connected !! DB Host: ${connectionInstance.connection.host}`);
     } catch (error) {
         //this type of writing helps in debugging... 
