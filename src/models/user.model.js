@@ -101,4 +101,5 @@ userSchema.methods.generateAccessToken = function(){
     )
 }
 
+// below mongoose User can directly call directly db
 export const User = mongoose.model("User", userSchema); 

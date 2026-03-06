@@ -24,3 +24,5 @@ class ApiError extends Error {
         }
     }
 }
+// means exporting class
+export {ApiError};
