@@ -1,0 +1,82 @@
+1. difference between http and https 
+- in http - data is mainly in plain text - like if abc -> then abc goes 
+- in https - data will be in encryption - like app jo data bhej rhe hain uske sath key or operation laga ke ek layer aur encryption ki increase krde - means client se server pr jake hi data readable ho 
+
+Hyper text transfer protocol - focus on text 
+
+
+***********in transfering we think of data structures , means two computers/operating system are talking to each other on a network {networking role also} 
+
+****** operating system us data ko rkhega bhi aur proccess bhi krega **********
+
+URL , URI , URN - locator , identifier , name 
+
+**** maily hame uska address chahiye ki main knha pe baat karoon 
+
+aur ab location mai bhi aisa jarorri nahi hai ki hamesa aapke pass url [http aaye ] , in mongo use [srv etc]
+
+
+1. HTTP Headers 
+
+metadata - headers are metadata of url 
+and headers are send in both request and response 
+
+**** and when you send request - in headers it also send that does you send request programmatically , or by use of postman , or from browser 
+
+*** usage of headers**** 
+a. in caching - ye dekhne ke liye ke ye request to abhi aayi thi ham isme se kuch cache data utha le kya 
+b. in authentication - bearer token hai kya , session cookies hai kya , 
+c. state management - user ki state like - kya woh logged user hai , kya woh guest user hai , kya usne cart mai kuch rkha hai kya 
+
+deprecated - means khatam ho chuka hai 
+
+
+A. Request Headers - > from client
+B. Response Headers - > from server
+C. Representation Headers -> encoding/compression [ like in mobile phones etc zip format]
+D. Payload Headers - > data [payload is fancy name to data]; 
+
+// some common headers 
+1 Accept:application/json [ for what type of data support]
+
+2 User-Agent - this is used to track by which application request is coming like browser, postman ,sometimes you see many website say use our app,  when you visit 
+
+3 Authorization - these are used in frontend and most common - sometime you see bearer token etc 
+
+4. content-type - data ka type 
+
+5. cookie - user validity etc 
+
+6. cache-control - kitni der baad expire kardu agar data network mein rhna chah rha hai 
+
+// some more CORS and Security related 
+
+
+2. HTTP Methods 
+
+1. GET : retrieve a message like data read from db 
+2. HEAD : No message body { it just response headers only}
+3. OPTIONS : what operation available on like /users pr post aur get aur kya kya 
+4. TRACE: for debugging 
+5. DELETE:delete a resource /remove
+6. PUT: update a resource 
+7. POST:mostly add /create
+8. PATCH:change part of resource
+
+
+
+3. HTTP Status Codes
+
+1** - Information 
+2** - Success 
+3** - Redirection 
+4** - Client Error 
+5** - Server Error 
+
+{
+    100 : continue , 102 : Processing(like after 3 sec)
+    200 : ok , 201: created , 202: accepted 
+    307 : temporarily accepted , 308 : permanentaly accepted 
+    400 : Bad Request , 401 : Unauthorized , 402: payment required , 404 : not found 
+    500 : Internal server , 504 : gateway timeout
+}
