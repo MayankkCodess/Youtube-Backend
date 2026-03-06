@@ -123,3 +123,8 @@ we need cloudinary for file uploading
 *********Important**************
 what we do is - 1.  we make user to upload file through multer and make/ place it on  our server locally . 
                 2. in second step what we do is using cloudinary take file from that local server
+                  
+
+                  video - 7 controllers , routers , postman 
+
+               1. postman also show you 1. response time , 2. headers data amount like bytes/kb

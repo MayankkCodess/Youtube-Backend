@@ -26,4 +26,14 @@ app.use(express.static('public'));
 app.use(cookieParser()); 
 
 
+// router imports here
+import userRouter from "./routes/user.routes.js";
+
+//router declaration - when you are doing app.get there you are doing route & contoller work in server file 
+// but now you need a middleware to get routes in this file 
+
+//below - /users is a prefix route and you have to tell that you are building api which version 
+app.use("/api/v1/users",userRouter); // now here when user writes /users - control goes to userRouter 
+// - http://localhost:8000/api/v1/users
+
 export {app};

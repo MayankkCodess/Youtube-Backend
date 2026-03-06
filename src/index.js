@@ -1,7 +1,7 @@
 // we want .env to load all variable to each files as early as possible, so configuring dotenv must be in main file
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
-import app from "./app.js";
+import {app} from "./app.js";
 //this (.config) is an method which takes an object of path of env
 //you can also do it in package.json watch - chai code - lec -2 33:58 timeline
 dotenv.config({
