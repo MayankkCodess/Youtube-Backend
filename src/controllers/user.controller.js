@@ -1,5 +1,5 @@
 // Logic Building Exercise - write as much controller you can 
-// always do console.log() to know more --------
+// always do console.log() to know more -------- response-cloudinary , req.body , req.files , 
 import { asyncHandler } from "../utils/asyncHandler.js";
 import {User} from "../models/user.model.js"
 import { ApiError } from "../utils/apiError.js";
@@ -9,7 +9,7 @@ import { apiResponse } from "../utils/apiResponse.js";
 
 // here we have created method in controller but when it run or to use it  - for that we need a url from routes so do that 
 
-export const registerUser = asyncHandler( async (req,res) =>{
+export const registerUser = asyncHandler(  async (req,res) =>{
     // *********Logic Building******* - Problem - You have to register User
     // Write steps always to split big problem into small problems 
 
@@ -36,15 +36,15 @@ export const registerUser = asyncHandler( async (req,res) =>{
     // params is also a way to send data from frontend to backend 
 
     // so hum kya karte hain req.body mai jo data aa rha hai usse destructure krlete hain 
-    const {fullname,username,password,email} = req.body; 
+         const {fullName,username,password,email} = req.body; 
     if( //.some return true /false and demands a callback fn
-        [fullname,email,username,password].some((field)=> 
+        [fullName,email,username,password].some((field)=> 
         field?.trim() === "")
     ){
         throw new ApiError(400 , "All Fields are required"); 
     }
 
-   const existedUser = User.findOne({
+   const existedUser = await User.findOne({
     $or:[{username},{email}]
    })
    if(existedUser){
@@ -54,8 +54,8 @@ export const registerUser = asyncHandler( async (req,res) =>{
 //    middleware - what it do is - it adds more fields in req.body
 // multer give you - req.files?.avatar[0]
 
-const avatarLocalPath = req.files?.avatar[0]?.path;
-const coverImageLocalPath = req.files?.coverImage[0]?.path;
+const avatarLocalPath = req.files?.avatar?.[0]?.path;
+const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
 
 if(!avatarLocalPath){
     throw new ApiError(400,"Avatar file is required");
@@ -69,7 +69,7 @@ if(!avatar){
 }
 //.create() - method takes - object
 const user = await User.create({
-    fullname,
+    fullName,
     avatar:avatar.url,
     coverImage:coverImage?.url || "",
     email,
@@ -84,6 +84,9 @@ if(!createdUser){
     throw new ApiError(500,"something went wrong while registering user")
 }
 return res.status(201).json(
-    new apiResponse(200,createdUser,`${user.fullname} Registered Successfully.`)
+    new apiResponse(200,createdUser,`${user.fullName} Registered Successfully.`)
 )
 })
+
+
+export const loginUser = asyncHandler()

@@ -60,12 +60,17 @@ const userSchema = new Schema(
 //these are hooks used like app.listen etc for events 
 
 //v.v.v.important points - arrow fn does not have the reference of this (drawback)  , because you need the reference of above full schema of user 
-userSchema.pre("save" , async function (next) {
-    if(!this.isModified("password")) return next();
+// userSchema.pre("save" , async function (next) {
+//     if(!this.isModified("password")) return next();
      
-    this.password = bcrypt.hash(this.password,10); 
-    next();
-})
+//     this.password = await bcrypt.hash(this.password,10); 
+//     next();
+// })
+userSchema.pre("save", async function () {
+    if(!this.isModified("password")) return;
+
+    this.password = await bcrypt.hash(this.password,10);
+});
 
 userSchema.methods.isPasswordCorrect = async function(password){
      return await bcrypt.compare(password,this.password);
@@ -89,7 +94,7 @@ userSchema.methods.generateAccessToken = function(){
 
 
 //refresh token has less information becaues it got refresh everytime
-userSchema.methods.generateAccessToken = function(){
+userSchema.methods.generateRefreshToken = function(){
     return jwt.sign(
         {
             _id:this.id

@@ -128,3 +128,11 @@ what we do is - 1.  we make user to upload file through multer and make/ place i
                   video - 7 controllers , routers , postman 
 
                1. postman also show you 1. response time , 2. headers data amount like bytes/kb
+
+               **********Postman Video 8 **************
+               1. collections in postman for production
+
+-----------------accesstoken , refreshtoken , middleware,cookies -----------
+
+1. jab tak aapke pass accesstoken hai , tab tak koi bhi feature jnha per authentication ki requirement hai , wnha pr aap access krsakte ho uss resource ko 
+2. by change mai aapko 15 min mai logout krdeta hun tab validate toh hum accesstoken se hi krte hain but -> refresh token kya hai hum database mai bhi rakhte hain user ko bhi dete hain , toh refresh token se ek endpoint hit krdo , then hum compare krlenge db aur user wala , then if same new access token allcoated to user 

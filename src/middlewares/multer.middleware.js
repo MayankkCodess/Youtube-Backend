@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
     //below 1. req(json data) is you getting from user , 2. file contain all files as json or etc data comings ways are configured in express already 
   destination: function (req, file, cb) {
     //below cb (callback) has many fields , null for not handling error and folder path to store files 
-    cb(null, '../../public/temp')
+    cb(null, './public/temp')// relative path pbm - read documentation
   },
   filename: function (req, file, cb) {
     // below unique suffix is to change name of file for security and duplicate name purposes so you can add it later 
