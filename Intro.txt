@@ -130,7 +130,8 @@ what we do is - 1.  we make user to upload file through multer and make/ place i
                1. postman also show you 1. response time , 2. headers data amount like bytes/kb
 
                **********Postman Video 8 **************
-               1. collections in postman for production
+               1. collections in postman for production 
+               2. we provide collections to frontend engineer 
 
 -----------------accesstoken , refreshtoken , middleware,cookies -----------
 

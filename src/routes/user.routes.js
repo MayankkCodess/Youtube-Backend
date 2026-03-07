@@ -9,8 +9,9 @@
 // 2nd Point - you need to import this route in either main server file{index.js} / app.js 
 
 import {Router} from "express"; 
-import { registerUser } from "../controllers/user.controller.js";
+import { loginUser, logoutUser, registerUser } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
+import { isAuthenticated } from "../middlewares/auth.middleware.js";
 
 const router = Router(); 
 
@@ -26,6 +27,8 @@ router.route("/register").post(upload.fields([
         maxCount: 1
     }
 ]),registerUser)//upload give you many options as it is coming from multer
-
+router.route("/login").post(loginUser);
+// you can add many middlewares as you want just add next() in last to know them what to run next now 
+router.route("/logout").get(isAuthenticated,logoutUser)
 export default router;
 

@@ -9,6 +9,26 @@ import { apiResponse } from "../utils/apiResponse.js";
 
 // here we have created method in controller but when it run or to use it  - for that we need a url from routes so do that 
 
+//we are going to create seperate method for generating access & refresh token 
+const generateAccessAndRefreshToken = async(userId) =>{
+     try {
+        const user = await  User.findById(userId); 
+       const accessToken =  user.generateAccessToken()
+        const refreshToken = user.generateRefreshToken()
+
+        //now , we provide accesstoken to user but we store refreshToken in db as well 
+        // to add value in object 
+        user.refreshToken = refreshToken;
+        // validation before save is because of , as we are not passing all fields of user to save in db , which is contradict to db 
+        await user.save({validationBeforeSave:false})
+
+        return {accessToken,refreshToken}
+     } catch (error) {
+        throw new ApiError(500, "something went wrong while generating token"); 
+     }
+}
+
+
 export const registerUser = asyncHandler(  async (req,res) =>{
     // *********Logic Building******* - Problem - You have to register User
     // Write steps always to split big problem into small problems 
@@ -83,10 +103,106 @@ const createdUser = await User.findById(user._id).select(//.select used for remo
 if(!createdUser){
     throw new ApiError(500,"something went wrong while registering user")
 }
-return res.status(201).json(
+return res.status(200).json(
     new apiResponse(200,createdUser,`${user.fullName} Registered Successfully.`)
 )
 })
 
 
-export const loginUser = asyncHandler()
+export const loginUser = asyncHandler(async(req,res)=>{
+    // logic building --- 
+    // 1. i will check , is all fields are coming 
+    // 2. then i will check , iss mail ka user db mai hai 
+    // 3. i will check password details from user comparing using bcrypt 
+    
+    // chai aur code ---------
+    /* req body <- data 
+        username or email check 
+        find the user 
+        password check 
+        acces and refresh token 
+        send cookie 
+        */
+
+         const {email , username , password}= req.body;
+         // check logic of this below - 
+         if(!(email || username) || !password) {
+            return res.status(400).json({
+                message : "Some fields are missing.",
+                success:false
+            })
+         }
+         // *** vvv imp-- this user instance you get from db have the schema methods like access,refesh , bcryptetc in user model .. remember - User does not have anything
+         //*Debugging below :- find() always returns an array , so use findOne() because below you are using - user.isPasswordCorrect(password) and it will crash because only object contains schema methods.
+         const user = await User.findOne({
+            $or:[{username},{email}]
+         })
+        
+         if(!user) {
+            return res.status(400).json({
+                message:"User not found. Plese register yourself.",
+                success:false
+            })
+         }
+
+         // *** vvv imp-- this user instance you get from db have the schema methods like access,refesh , bcryptetc in user model .. remember - User does not have anything
+         const isPasswordValidate = await user.isPasswordCorrect(password);
+         if(!isPasswordValidate){
+            throw new ApiError(404, "Invalid Password . Please try again"); 
+         }
+
+         // now below , if you see clearly - it may possible for method to take time so use await
+         // and also from the method you get two properties in return so destructure them also 
+         const {accessToken,refreshToken} = await generateAccessAndRefreshToken(user._id);  
+         
+         // now if you see the {user} you have is old because now user has refresh token also in its documents so either update or make one extra db call 
+         const loggedInOrUpdatedUser = await User.findById(user._id).select(
+            "-password -refreshToken"
+         )
+         
+         // so when you have to send cookies , then you have to basically create a object 
+         const options = {
+            httpOnly:true,
+            secure:false,//when you do httpOnly & secure as true , that means now only backend can modify cookies , by default frontend can also modify it , so here you are securing from frontend
+         }
+         //key name & then value
+         return res.status(200).cookie("accessToken",accessToken,options)
+         .cookie("refreshToken",refreshToken,options)
+         .json({
+            message:`${user.fullName} Logged In Successfully.`,
+            success:true,
+            refreshToken,accessToken,loggedInOrUpdatedUser
+         })
+ 
+         //*vvv.imp - if you see , req is a object in which by using middleware like multer cookieparser you have added req.files and req,res.cookie just by using cookieparser middlewareetc 
+         // so that means you can also creat your own middleware to add something in objects  
+
+})
+
+export const logoutUser = asyncHandler(async(req,res)=>{
+            // req.user you get from middleware method isAuthenticated , which has changed or add .user in req object 
+            
+            //remember - removing from DB and removing from user are two different things 
+            await User.findByIdAndUpdate(
+                req.user._id,
+                {
+                    $set:{
+                            refreshToken:undefined
+                    }
+                },
+                {
+                    // below we are demading a new update data from db in return document
+                    new:true
+                }
+            )
+            // below we are going to delete cookies from user also 
+            const options = {
+                httpOnly:true,
+                secure:false// remember :- secure : true krne ka matlab , keval https pr hi browser mein cookies send kr paoge
+            }
+            return res.status(200)
+            .clearCookie("accessToken",options)
+            .clearCookie("refreshToken",options)
+            .json(new apiResponse(200 , {} , "User LoggedOut Successfully."))
+         })
+

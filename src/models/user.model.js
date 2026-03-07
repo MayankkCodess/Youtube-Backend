@@ -80,12 +80,12 @@ userSchema.methods.generateAccessToken = function(){
     //ynha per jaise hi accesstoken generate hoga woh isse return krdega
     return jwt.sign(
         {
-            _id:this.id,
+            _id:this._id,
             email:this.email,
             username:this.username,
             fullName:this.fullName
         },
-        process.env.ACCESS_TOKEN_SECRET,
+        process.env.ACCESS_TOKEN_SECRET,//remember my this secret is used by jwt to 1. create jwt signature and 2. verify jwt authenticity 
         {
             expiresIn:process.env.ACCESS_TOKEN_EXPIRY
         }
