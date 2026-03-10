@@ -23,6 +23,8 @@
 
 const asyncHandler = (requestHandler) => {
   return (req, res, next) => {
+    //below this .catch(next(err)) passes error to middleware (errorhandling middleware) which then sends response to frontend 
+    // if no error.middleware , then express default error handling works 
     Promise.resolve(requestHandler(req, res, next)).catch((err) => next(err));
   };
 };
